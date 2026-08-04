@@ -122,16 +122,53 @@ purgé, chaque document produit propage l'erreur.
 - **Nom non arrêté** à 2-3 mois du rendu : risque opérationnel (tous les
   livrables à re-marquer). Décision à prendre vite (short-list vérifiée INPI).
 
-## 5. Validation des faits (recherche web du jour)
+## 5. Validation des faits (recherche web du 04/08/2026 — détail : `02_VALIDATION_FAITS.md`)
 
-*(section complétée après retour des vérifications — voir 02_VALIDATION_FAITS.md)*
+- **Les deux chiffres d'accroche sont américains.** « 59 % stressés » = PwC 2026,
+  périmètre US uniquement. « 3 h/semaine » = PwC 2023, US, et ne concerne que
+  les salariés déjà stressés ET distraits (56 % d'entre eux) — la formulation
+  actuelle est doublement fausse. → l'architecture de preuve passe aux stats
+  françaises : Malakoff Humanis 2025 (18 % des salariés en difficulté financière,
+  +9 pts vs 2020), CSA 2025 (24 % à découvert chaque mois), Ciclade (7,9 Md€
+  d'avoirs en déshérence), AFG (200 Md€ d'épargne salariale, 3 113 €
+  bruts/salarié en 2024). PwC passe en « marché précurseur US ». **P0.**
+- Confirmés : 12,82/20 (janv. 2026 — écrire 12,8, pas « 13/20 »), 56 %
+  connaissance de base (2023), dépression 28 % vs 9 % (SPF 2024), Grande Cause
+  2025 **prolongée 2026** (bonus). À reformuler : « plan 10 ans EDUCFI » →
+  généralisation du Passeport en 4e à la rentrée 2026, plan 2026-2028.
 
-## 6. Concurrence (recherche web du jour)
+## 6. Concurrence (recherche web du 04/08/2026 — détail : `03_CONCURRENCE.md`)
 
-*(section complétée après retour des vérifications — voir 03_CONCURRENCE.md)*
+- **L'USP actuelle est réfutée : Filib' existe.** 200+ entreprises clientes,
+  ~500 000 salariés couverts (Carrefour, Air France, Microsoft…), distribution
+  AXA, neutralité revendiquée mot pour mot, spécialisation épargne
+  salariale/retraite, dashboard employeur. « Le seul dispositif neutre qui
+  mesure et active » ne survit pas à 30 secondes de Google. **P0 — reconstruire
+  l'USP** sur : produit self-service + coach hybride IA/humain + indice &
+  benchmark continus + ciblage ETI + couverture 100 % de l'effectif — et mettre
+  Filib' EN PREMIER dans la matrice concurrentielle.
+- Matrice à 5 : Filib' (frontal), Epsor (possède la relation DRH + les encours,
+  non neutre = notre angle), Rosaly (EWA + éducation, 10 M€ levés), Wagestream
+  (352 M€ levés, GM France en recrutement — menace d'entrée), Klaro (budget
+  « pouvoir d'achat » des DRH).
+- **Northstar : racheté par Nayya (sept. 2025), sortie médiocre probable — à
+  retirer des preuves de marché.** Origin a partiellement pivoté B2C. Brightside
+  n'a pas levé depuis 2022. Récit honnête : catégorie validée mais en
+  consolidation, la distribution est le nerf de la guerre (détail :
+  `04_BENCHMARKS.md`).
+- **Adoption : 40 % à 3 mois est le niveau du MEILLEUR client de Moka.care**
+  (moyenne implicite ~20 %, RAND ~20 %, EAP digitaux 10-20 %). → re-scénariser :
+  central 20-25 %, haut 40 % conditionné, bas 10-15 % avec parade. **P0 — le BP
+  et l'argumentaire de rétention doivent tenir au scénario central.**
+- **Prix : 8-15 € = haut de gamme des benefits facultatifs français** (seul
+  benchmark public : Wellpass 1-20 €/salarié/mois ; Alan ~30 € mais obligatoire).
+  8 € est l'ancrage défendable ; 15 € se vend au ROI. Aucun concurrent ne
+  publie ses prix → le test prix DRH reste l'hypothèse n°1.
 
 ## 7. Les questions qui feront mal (préparer AVANT l'oral)
 
+0. « Connaissez-vous Filib' ? Ils font ce que vous décrivez, avec Carrefour et
+   AXA comme références. Pourquoi vous ? » — LA question à préparer en premier.
 1. « Votre BP suppose 15 ETI en an 1 avec un cycle de 3-5 mois et une équipe
    d'une personne. Refaites le calcul devant nous. »
 2. « Pourquoi une DRH paierait 8-15 € par salarié pour TOUS les salariés alors
@@ -151,6 +188,7 @@ purgé, chaque document produit propage l'erreur.
 
 | # | Chantier | Produit | Priorité |
 |---|---|---|---|
+| 0 | Reconstruction de l'USP + matrice concurrentielle intégrant Filib', Epsor, Rosaly, Wagestream, Klaro ; re-scénarisation adoption 20-25 % | positionnement réécrit, répercuté partout | P0 |
 | 1 | Purge des incohérences (§2) dans les documents socles | `00_SOCLE_CHIFFRES.md` fait foi | P0 |
 | 2 | Modèle financier xlsx complet (hypothèses → CR → tréso → financement → seuil) | `annexes/BP_Modele.xlsx` | P0 |
 | 3 | Tableaux de bord de pilotage | `annexes/Tableaux_de_bord.xlsx` | P0 |
