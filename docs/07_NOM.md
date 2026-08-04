@@ -22,7 +22,29 @@
 > d'antériorité officielle INPI (data.inpi.fr, classes 9, 36, 41 — idéalement
 > 35 + EUIPO) reste indispensable avant de trancher. Rien ici ne la remplace.
 
-## Short-list (classée) — reco : **Estime**, challenger **Aurige**
+## Déclinaisons autour d'« Estime » (vérifiées le 04/08/2026 — planche : noms_declinaisons.png)
+
+| Variante | Verdict | Détail |
+|---|---|---|
+| **estime.** (base) | ✅ Faible/moyen | Aucun conflit actif trouvé ; .fr/.com parkés (négociables) |
+| **haute estime** | ✅ **Le plus dégagé** | 0 société au registre, 0 présence web, .fr ET .com apparemment libres ; nom composé, registre littéraire |
+| **æstime** | 🟡 Faible/moyen | Homonymes (Aestime assurance…) tous cessés, aestime.fr libre ; MAIS homophone exact d'« estime » → mêmes antériorités phonétiques, la graphie ne protège pas |
+| **estimée** | 🟡 Faible | Terrain quasi vierge, mais distinctivité faible (quasi descriptif) |
+| **estyme / estym** | 🟠 Moyen | Estym Coaching actif — coaching d'ESTIME DE SOI (classe 41, notre terrain) ; homophone |
+| estima | ❌ Éliminé | Estima Inc. (logiciel financier/économétrie, estima.com actif) + Toyota Estima + ~35 homonymes FR |
+| estimia | ❌ Éliminé | Estimia by DIGIPI (logiciel d'estimation FR actif) + Estimia Italie (valorisation) |
+| estimeo | ❌ Éliminé | Estimeo (notation/valorisation d'entreprises, Paris, repris par Linkera 2023, actif) — conflit frontal 9+36 |
+
+Enseignement : toutes les variantes homophones ([ɛstim]) partagent le même risque
+phonétique à l'INPI — la graphie (æ, y) est un choix ESTHÉTIQUE, pas une
+protection. Le vrai choix est donc : **« estime. » (mot simple, le plus fort à
+l'oral) vs « haute estime » (le plus propre juridiquement, plus littéraire)**.
+
+Sources : registre annuaire-entreprises.data.gouv.fr (API), societe.com,
+estima.com, journaldelagence.com (Estimia/DIGIPI), estym-coaching.com,
+maddyness.com (Estimeo×Linkera).
+
+## Short-list initiale (pour mémoire) — Estime, challenger Aurige
 
 | Rang | Nom | Histoire (le « pourquoi » racontable au jury) | Conflits trouvés | Domaines | Risque |
 |---|---|---|---|---|---|
