@@ -108,10 +108,13 @@ ventes −30 % (+0,33 M€) et à prix −20 % (+0,61 M€).
 
 ## 7. Nom et identité — DÉCISIONS du 04/08/2026
 
-- **Nom : ESTIME** (remplace le nom de travail « Séréane »), sous réserve de la
-  vérification INPI classes 9/36/41 (mode opératoire : 07_NOM.md). Repli : Aurige.
-  Baseline : « La santé financière des salariés, mesurée et activée. »
-  Toujours aucun nom dans les noms de fichiers.
+- **Nom : LUCÉANE** (remplace « Estime », écarté car mot courant, et le nom de
+  travail « Séréane »). Latin *lux* : celle qui éclaire l'argent qui dort.
+  Réserve documentée : marque cosmétique LUCEANE™ (Sederma/Croda, classes 1/3
+  ≠ nos classes 9/36/41) → vérification INPI officielle obligatoire avant dépôt ;
+  domaines : luceane.app/.io (le .fr est pris). Repli n°1 : Valéane (valeane.fr
+  libre). Détail : 07_NOM.md. Baseline : « La santé financière des salariés —
+  mesurée, éclairée, activée. » Toujours aucun nom dans les noms de fichiers.
 - **Identité : synthèse 70/20/10** (A clarté / B chaleur / C énergie) — spec
   complète et palette actée : 08_IDENTITE_VISUELLE.md.
 - **Chiffres : v1.0 du modèle adoptée** (§3) — le récit officiel est

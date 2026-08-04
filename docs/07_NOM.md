@@ -1,9 +1,31 @@
-# NOM — short-list vérifiée (recherche web du 04/08/2026)
+# NOM — historique des vérifications (04/08/2026)
 
-> **DÉCISION (04/08/2026) : ESTIME** — validé sur l'histoire (mesurer / estime
-> de soi / naviguer à l'estime). Sous réserve de la vérification INPI ci-dessous ;
-> repli : Aurige. Baseline de travail : « La santé financière des salariés,
-> mesurée et activée. »
+> **DÉCISION FINALE (04/08/2026) : LUCÉANE** — du latin *lux, lucere* : celle
+> qui met en lumière l'argent qui dort. Choisie pour sa musique (voyelles
+> ouvertes, consonnes liquides) et son histoire produit (Cockpit = éclairer).
+> Baseline : « La santé financière des salariés — mesurée, éclairée, activée. »
+>
+> **Réserve documentée (à dire en annexe du dossier, pas à cacher)** :
+> LUCEANE™ est une marque active de Sederma (Croda) en cosmétique (classes
+> 1/3) ; nos classes 9/36/41 sont distinctes → dépôt défendable d'après la
+> pré-vérification, MAIS recherche de similarité INPI officielle obligatoire
+> avant tout dépôt réel. Domaines luceane.fr/.com pris → stratégie : luceane.app
+> / luceane.io, négociation du .fr ultérieure. Au registre des sociétés : rien
+> d'actif en finance/RH/logiciel sous ce nom (un salon de thé, deux SCI).
+>
+> **Repli n°1 : VALÉANE** (latin *valere* = être en bonne santé ET avoir de la
+> valeur) — le plus propre de toutes les salves : valeane.fr LIBRE, homonymes
+> exacts radiés (reste un bureau de tabac), une seule ombre phonétique
+> (Valeanne Finances, cl. 36) à vérifier à l'INPI. Repli n°2 : Aurige.
+>
+> Éliminés par la vérification du 04/08 : Lévane (LEVANE SARL active en 66.19B
+> services financiers — conflit frontal), Salvéa (2 homonymes actifs + espace
+> Salvea/Salveo saturé en santé-RH), Aurane (conseil lyonnais + holding actifs),
+> Théane (propre en 9/36/41 mais maroquinerie + écho « théanine », pas de .fr).
+>
+> Historique des décisions : « Estime » avait été retenu le 04/08 puis écarté
+> (mot courant, à la demande de la fondatrice) ; la piste « instruments »
+> (sextant, alidade, astrolabe, octant, astrée, eunoia) écartée (phonétique).
 >
 > **Mode opératoire INPI (30 min, à faire avant tout dépôt)** : sur
 > data.inpi.fr → Recherche marques → chercher « estime » en exact ET en
