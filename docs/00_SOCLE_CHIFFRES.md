@@ -31,24 +31,44 @@
 | SOM | ≈ 10 M€ (≈ ARR an 3) | [HYP] |
 | Cycle de vente ETI | 3 à 5 mois | [HYP] |
 
-## 3. Business plan 3 ans (têtes de chapitre — détail à construire)
+## 3. Business plan 3 ans — CHIFFRES CANONIQUES v1.0 (04/08/2026)
+
+> Issus du modèle `annexes/Modele_Financier_BP.xlsx` (652 formules, 0 erreur,
+> rapprochement financement/trésorerie = 0). Ils REMPLACENT les anciens
+> « ARR 0,8/3,5/9,5 M€ · +0,9 M€ an 3 » qui confondaient ARR et CA et
+> n'avaient aucun calcul sous-jacent. Tout livrable cite CES chiffres.
 
 | Indicateur | An 1 | An 2 | An 3 |
 |---|---|---|---|
-| Clients (ETI) | 15 | 50 | 120 |
-| Salariés couverts | 6 000 | 25 000 | 70 000 |
-| ARR | 0,8 M€ | 3,5 M€ | 9,5 M€ |
-| Marge brute | ~78 % | ~78 % | ~78 % |
-| Résultat | négatif | négatif | +0,9 M€ |
+| Clients ETI (fin d'année, net) | 15 | 50 | 120 |
+| Salariés couverts (fin) | 6 000 | 25 000 | 70 000 |
+| Taille moyenne client (salariés) | 400 | 500 | 583 |
+| Mix Patrimoine (% salariés) — land & expand | 20 % | 28 % | 35 % |
+| Prix moyen (€/sal/mois) | 9,40 | 9,96 | 10,45 |
+| **ARR fin d'année (run-rate)** | **0,68 M€** | **3,0 M€** | **8,8 M€** |
+| **CA comptabilisé** (abonnements + pilotes + packs) | **0,24 M€** | **2,13 M€** | **6,73 M€** |
+| Marge brute | 83 % | 80 % | 80 % |
+| **EBITDA** | **−0,53 M€** | **−0,17 M€** | **+1,95 M€ (29 %)** |
+| Résultat net (IS 25 % après reports déficitaires) | −0,54 M€ | −0,19 M€ | +1,63 M€ |
+| Trésorerie fin d'année (levée incluse) | 0,95 M€ | 0,71 M€ | 2,26 M€ |
+| ETP moyens | ~4 | ~13 | ~27 |
 
-Prix moyen implicite : an 1 : 11,11 € · an 2 : 11,67 € · an 3 : 11,31 € /salarié/mois.
-⚠ Le mix Essentiel/Patrimoine impliqué (~55/45) n'est justifié nulle part et dérive
-d'une année à l'autre sans explication. À modéliser explicitement (annexe xlsx).
+**Seuil de rentabilité** : ~19 600 salariés couverts (structure de coûts an 2)
+soit ~39 ETI — EBITDA trimestriel positif à partir du T7 (an 2) ; en structure
+an 3 : ~34 200 salariés / ~59 ETI. **Robustesse** : EBITDA an 3 reste positif à
+ventes −30 % (+0,33 M€) et à prix −20 % (+0,61 M€).
+
+**Entonnoir an 1** (justifie les 15 clients) : 500 comptes travaillés → 125 RDV
+→ 63 démos → 25 pilotes → 15 contrats. Intenable seule → AE recruté dès M4.
+
+**Efficacité commerciale** : CAC an 2 ≈ 18 k€/client · ARR/nouveau client an 2
+≈ 60 k€ · payback CAC ≈ 4-5 mois sur marge brute.
 
 | Financement | Valeur | Statut |
 |---|---|---|
-| Levée | 1,5 M€ (40 % produit · 35 % commercial · 15 % contenu · 10 % structure) | [HYP] — ⚠ timing incohérent : le plan 12-18 mois dit « lever à 18 mois », mais le BP an 1 suppose une équipe et un MVP financés dès le départ. À trancher. |
-| Taille moyenne client | an 1 : 400 salariés · an 2 : 500 · an 3 : 583 | Implicite — à assumer et justifier |
+| Levée seed | **1,5 M€, encaissée T1 an 1** (l'incohérence « levée à 18 mois » est tranchée : le tour se fait à la création) | Justification : besoin cumulé max hors levée 0,92 M€ (central) · 1,43 M€ (prudent, ventes −30 %) → 1,5 M€ couvre le scénario prudent. Trésorerie jamais < 0,60 M€. |
+| Ante-création | 60 k€ de frais, financés par apport 30 k€ + prêt d'honneur 20 k€ + subvention 30 k€ [HYP à confirmer] | Plan de financement, onglet dédié |
+| Allocation levée | 40 % produit · 35 % commercial · 15 % contenu · 10 % structure | [HYP] — à réconcilier avec le plan d'embauche du modèle |
 
 ## 4. Adoption / usage
 
