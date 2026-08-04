@@ -1,4 +1,22 @@
-# NOM — short-list vérifiée (recherche web du 04/08/2026) · DÉCISION À PRENDRE
+# NOM — short-list vérifiée (recherche web du 04/08/2026)
+
+> **DÉCISION (04/08/2026) : ESTIME** — validé sur l'histoire (mesurer / estime
+> de soi / naviguer à l'estime). Sous réserve de la vérification INPI ci-dessous ;
+> repli : Aurige. Baseline de travail : « La santé financière des salariés,
+> mesurée et activée. »
+>
+> **Mode opératoire INPI (30 min, à faire avant tout dépôt)** : sur
+> data.inpi.fr → Recherche marques → chercher « estime » en exact ET en
+> similarité phonétique (estim, esteem, estyme) → filtrer classes 9 (logiciels),
+> 36 (finance), 41 (formation), idéalement 35 → noter toute marque VIVANTE dans
+> ces classes avec activité proche → si doute, même recherche sur EUIPO
+> (euipo.europa.eu). Ensuite seulement : dépôt (~190 € une classe + 40 €/classe
+> supp.) et enregistrement des domaines (estime.app, estime.finance ;
+> négociation estime.fr parké en second temps).
+>
+> Occurrences de « Séréane » à remplacer le moment venu : 3 dans le dépôt
+> (mentions historiques dans ce fichier et le socle — conservées volontairement),
+> et l'ensemble des documents Drive (réécrits de toute façon dans les livrables).
 
 > Vérifications web heuristiques (societe.com, Pappers, domaines). La recherche
 > d'antériorité officielle INPI (data.inpi.fr, classes 9, 36, 41 — idéalement

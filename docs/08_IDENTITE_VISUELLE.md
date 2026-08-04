@@ -1,4 +1,21 @@
-# IDENTITÉ VISUELLE — 3 directions argumentées · DÉCISION À PRENDRE
+# IDENTITÉ VISUELLE — 3 directions argumentées
+
+> **DÉCISION (04/08/2026) : synthèse des trois directions**, art-dirigée selon
+> la règle 70/20/10 (mockup : `estime_identite.png`) :
+> - **De A (~70 %, le socle)** : grille stricte, fonds clairs, chiffres rois,
+>   2 couleurs max par graphique, 1 idée par slide.
+> - **De B (~20 %, la chaleur)** : fond coquille `FAF7F2`, serif **Fraunces**
+>   réservée aux grands chiffres et citations, filet or `E0B84C` en respiration,
+>   photos humaines réelles dans le dossier.
+> - **De C (~10 %, l'énergie)** : cartes arrondies et pastilles pour le produit
+>   uniquement ; jamais pour le financier.
+> - **Palette actée** : encre `1B2A41` · vert d'activation `2E9E6B` (LA couleur
+>   du geste : gains, activation, CTA) · coquille `FAF7F2` · or discret `E0B84C`
+>   · bleu données `A8C6DC` (secondaire graphiques).
+> - **Typo actée** : Inter (corps, labels, UI) + Fraunces (grands chiffres,
+>   citations). Fallbacks bureautique : Calibri / Georgia.
+> - **Interdits** : dégradés violets, mascottes, plus d'un accent par slide.
+> S'applique aux gabarits deck (pptx), dossier (docx) et maquette (CSS tokens).
 
 > L'existant (teal 2F7D6B, Cambria + Calibri) est le point de départ, pas la
 > contrainte. Contexte d'usage : un dossier lu par des investisseurs, un deck

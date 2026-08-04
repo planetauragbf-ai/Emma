@@ -106,8 +106,13 @@ ventes −30 % (+0,33 M€) et à prix −20 % (+0,61 M€).
 - **Sophie**, 34 ans, cheffe de projet, un enfant, un crédit ; stress financier
   élevé ; exige confidentialité vis-à-vis de l'employeur. [HYP]
 
-## 7. Nom
+## 7. Nom et identité — DÉCISIONS du 04/08/2026
 
-Nom de travail : « Séréane » — NON ARRÊTÉ. Jamais dans les noms de fichiers.
-Écartés : Boussole, Finavie, Pécuria, Poséa, Wivéa, Soléane, Vigie, Ariane.
-INPI classes 9/36/41 + domaines à vérifier avant décision.
+- **Nom : ESTIME** (remplace le nom de travail « Séréane »), sous réserve de la
+  vérification INPI classes 9/36/41 (mode opératoire : 07_NOM.md). Repli : Aurige.
+  Baseline : « La santé financière des salariés, mesurée et activée. »
+  Toujours aucun nom dans les noms de fichiers.
+- **Identité : synthèse 70/20/10** (A clarté / B chaleur / C énergie) — spec
+  complète et palette actée : 08_IDENTITE_VISUELLE.md.
+- **Chiffres : v1.0 du modèle adoptée** (§3) — le récit officiel est
+  « rentable dès le T7 en trimestriel, année 3 en plein, robuste à −30 % ».
