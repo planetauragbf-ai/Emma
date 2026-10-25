@@ -21,3 +21,7 @@ Dépôt de travail. Nom de la société non arrêté (jamais dans les noms de fi
 - Un chiffre qui change dans `00_SOCLE_CHIFFRES.md` change dans tous les livrables.
 - Limites CDC : dossier 25-30 pages · deck ≤ 20 slides · présentation 20 min.
 - Placeholders : [Nom Prénom], [Promotion].
+
+## Autre projet
+
+- `winetech/` — **Passavin** (nom provisoire) : étude de faisabilité WineTech + dossier/pitch Bloc 3 (voir `winetech/README.md`).
