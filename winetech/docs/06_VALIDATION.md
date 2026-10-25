@@ -1,12 +1,13 @@
 # Étape 4 — Plan de validation commerciale (« le marché est-il prêt à payer ? »)
 
+> **Note V2** : les seuils « GO levée seed » sont relevés (seed de 750 k€ à M12, voir `07_BUSINESS_MODEL_BP.md` §7.7).
 > Tous les seuils ci-dessous sont des **objectifs proposés**, à fixer définitivement avant de commencer (pour ne pas les adapter aux résultats).
 
 ## 6.1 Phasage et budget
 
 | Phase | Période (proposée) | Objectif | Livrable | Budget |
 |---|---|---|---|---|
-| 0. Sécurisation | Nov. 2026 | Contrat de travail relu, accord Planet Aura, dépôt de marque préparé | Note avocat | 1 500 € |
+| 0. Sécurisation | Nov. 2026 | Recherche d'antériorité sur le nom, dépôt de marque préparé, contrats types (CGV, DPA) | Note du conseil | 1 500 € |
 | 1. Découverte | Nov.-déc. 2026 | 25 entretiens domaines + 5 agences + 4 logisticiens | Synthèse problème, volumes, outils | 1 000 € (déplacements) |
 | 2. Prototype & prix | Janv. 2027 | Maquette cliquable (Figma) + page d'attente + test de prix | 15 démos, liste d'attente | 1 500 € |
 | 3. Pré-vente | Janv.-fév. 2027 | Lettres d'intention **avec acompte** (frais d'installation pilote 190 €) | ≥ 8 pré-ventes | 0 € |
@@ -49,14 +50,16 @@
 | Logisticiens prêts à signer un accord API | **≥ 2** (dont ≥ 1 hors Planet Aura) | 1 | 0 hors Planet Aura |
 | Logisticiens prêts à payer un frais par expédition | ≥ 1 | 0 → modèle « sans logisticien » | — |
 
-| Indicateur | Seuil « GO levée seed » (M12-M15) |
+| Indicateur | Seuil « GO levée seed » (V2 : M10-M12) |
 |---|---|
-| Clients payants actifs | ≥ 20 |
-| MRR | ≥ 1 800 € |
+| Domaines payants actifs | ≥ 25 (BP central : 32 à M12) |
+| Revenu récurrent mensuel | ≥ 3 000 € |
 | Résiliation mensuelle | ≤ 2 % |
 | Activation (1ʳᵉ commande transmise < 14 j après installation) | ≥ 80 % |
 | Temps de traitement après installation | ≤ 2 min/commande |
 | Logisticiens intégrés en production | ≥ 2 |
+| Lettre d'intention d'un logisticien pour l'offre Partner (marque blanche) | ≥ 1 |
+| Entretiens en Italie (avant le recrutement du sales Italie) | ≥ 10, dont ≥ 3 caves prêtes à tester |
 | NPS pilotes | ≥ 30 |
 
 **Règle de décision** : GO si tous les seuils « GO » marqués en gras sont atteints et ≥ 4 des autres ; REVOIR (pivot : marque blanche pour logisticiens, ou cible agences) si 2 seuils sont en zone « revoir » ; STOP si un seuil « STOP » est franchi sur les pré-ventes ou les logisticiens.

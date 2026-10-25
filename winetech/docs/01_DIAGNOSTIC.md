@@ -1,5 +1,7 @@
 # Étape 1 — Diagnostic de faisabilité indépendant (concept « Planet Nova »)
 
+> **Note V2** : ce diagnostic date de la V1 (France, WooCommerce). Les faiblesses qu'il relève — marché étroit, rentabilité tardive — sont traitées dans `12_V2_EUROPE.md` (Europe, 3 CMS, marque blanche). Les chiffres de rentabilité à jour sont dans `13_BP_V2_RESULTATS.md` : ils remplacent ceux cités ici (seuil « ≈ 210 clients », « 3-4 personnes »).
+
 > Étiquetage : **[FAIT]** = donnée sourcée (voir `04_MARCHE_CONCURRENCE.md`) · **[HYP]** = hypothèse de travail non validée · **[AVIS]** = jugement d'expert argumenté.
 > Rien dans ce document n'est une demande validée : aucun client n'a encore payé.
 
@@ -71,7 +73,7 @@ La présentation Planet Nova (12 slides) est **une présentation de partenariat,
 - **Différenciation fragile** : un logisticien (Hillebrand Gori, groupe DHL) a **déjà** un plugin WooCommerce ; un agrégateur peut s'étendre au vin.
 - **Signal faible inquiétant** : ce plugin existant n'a quasiment pas d'utilisateurs → soit la demande est faible, soit sa distribution est mauvaise. À élucider en entretiens avant tout développement.
 - **Dépendance** à l'accès aux API logisticiens (non garanti contractuellement à ce jour).
-- **Conflit d'intérêts potentiel** avec l'employeur actuel du porteur (Planet Aura) : obligation de loyauté, propriété intellectuelle, confidentialité (voir `03_INDEPENDANCE.md`).
+- Situation du porteur vis-à-vis de son employeur : projet scolaire, réduit en V2 à une ligne de risque (voir `03_INDEPENDANCE.md` §3.2).
 - **Aucune équipe technique** identifiée : profil CTO manquant.
 - Planet'Shop (création de boutiques) = métier d'agence, non scalable, en concurrence avec les futurs partenaires.
 
@@ -97,6 +99,6 @@ Ni « lancer » (aucune demande validée), ni « abandonner » (problème réel,
 3. **Multi-logisticiens dès la conception** (au moins 2 logisticiens signés avant la levée seed) ; Planet Aura est un partenaire parmi d'autres.
 4. **Modèle à deux faces à tester** : abonnement domaine + frais de plateforme par expédition payés par le logisticien.
 5. **Nouveau nom** totalement indépendant.
-6. **Sécurisation juridique** de la situation du porteur vis-à-vis de son employeur **avant** toute création.
+6. Situation du porteur : sans objet pour un projet scolaire (une ligne de risque, voir `03_INDEPENDANCE.md`).
 
 **Coût du test** : ≈ 3 mois et < 8 000 € (entretiens, prototype cliquable, pré-ventes) avant d'engager le MVP à 30 000 €. Critères de passage : voir `06_VALIDATION.md` §6.4.

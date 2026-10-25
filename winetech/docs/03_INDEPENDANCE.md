@@ -1,5 +1,7 @@
 # Étape 2 bis — Indépendance vis-à-vis de Planet Aura
 
+> **V2** : le volet « conflit avec l'employeur » est réduit à une ligne de risque et une phrase de réponse (§3.2), le projet étant scolaire.
+
 > Ce document n'est pas un avis juridique. Les points marqués ⚖️ doivent être validés par un avocat (droit du travail + propriété intellectuelle) **avant** l'immatriculation.
 
 ## 3.1 Séparer ce qui appartient à qui
@@ -15,18 +17,11 @@
 
 **Règle de rédaction appliquée à tous les livrables** : toute donnée issue de l'écosystème Planet Aura est signalée « Source : écosystème Planet Aura — non attribuable à Passavin ».
 
-## 3.2 Le point le plus sensible : la situation du porteur ⚖️
+## 3.2 La situation du porteur (allégée en V2)
 
-Le porteur est aujourd'hui **commercial dans le transport de vin**. Trois risques doivent être levés avant toute création :
-
-| Risque | Base | Action |
-|---|---|---|
-| **Obligation de loyauté** pendant le contrat de travail | Code du travail, art. L1222-1 (exécution de bonne foi) | Relire le contrat ; informer l'employeur ; ne pas travailler sur le projet pendant le temps de travail ni avec ses moyens |
-| **Clause de non-concurrence / exclusivité** | Contrat de travail | Vérifier l'existence et la portée ; une clause d'exclusivité ne peut s'opposer à une création d'entreprise pendant 1 an dans certains cas (art. L1222-5) ⚖️ |
-| **Propriété du code** si développé dans le cadre des fonctions | CPI art. L113-9 : les logiciels créés par un salarié dans l'exercice de ses fonctions appartiennent à l'employeur | Aucune ligne de code ni spécification produite pour Planet Aura ne doit être réutilisée ; repartir d'une page blanche documentée (dépôt horodaté) |
-| **Congé ou temps partiel pour création** | Code du travail, art. L3142-105 et s. | Option pour sécuriser la transition |
-
-**Recommandation** : présenter le projet à la direction de Planet Aura comme **un futur partenaire neutre** qui lui apportera des expéditions et réduira ses coûts d'intégration — et obtenir un **accord écrit** (non-opposition + absence de revendication de PI).
+Le projet est **uniquement scolaire** : il n'y a pas de lancement réel. Le sujet est donc réduit à :
+- **une ligne de risque** : R17 dans `10_RISQUES_TABLEAUX_DE_BORD.md` (probabilité 1, impact 3) ;
+- **une phrase de réponse si le jury pose la question** : « C'est un projet d'école ; s'il devenait réel, je le développerais hors de mon temps de travail, sans aucune donnée ni ligne de code de mon employeur, après avoir fait relire mon contrat et obtenu son accord écrit — et Planet Aura serait un logisticien partenaire parmi d'autres, aux mêmes conditions. »
 
 ## 3.3 Dépendance aux API logisticiens
 
@@ -56,4 +51,4 @@ Le porteur est aujourd'hui **commercial dans le transport de vin**. Trois risque
 | Préavis | 6 mois en cas de retrait d'API ; maintien des commandes en cours |
 | Marque | Usage du nom du partenaire uniquement « compatible avec », jamais « filiale de » |
 
-**Conflit d'intérêts à déclarer** : tant que le porteur est salarié de Planet Aura, le contrat de partenariat Planet Aura doit être négocié par un tiers (associé, conseil) et le lien déclaré aux autres logisticiens.
+**Neutralité** : Planet Aura bénéficie exactement des mêmes conditions que les autres logisticiens (mode neutre et offre Partner) ; ses intégrations existantes ne sont jamais présentées comme des clients de Passavin.

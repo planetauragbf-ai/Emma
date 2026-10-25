@@ -1,5 +1,7 @@
 # Étape 3 — Concept optimisé : produit, parcours, MVP
 
+> **Note V2** : le MVP reste une extension WooCommerce (M1-M4). Feuille de route V2 : Shopify à M18, PrestaShop à M25, puis l'offre **Passavin Partner** (marque blanche pour logisticiens) dès la 1ʳᵉ licence à M15 (voir `12_V2_EUROPE.md` §12.4-12.5).
+
 ## 5.1 Proposition de valeur (une phrase)
 
 > **Passavin branche votre boutique WooCommerce aux logisticiens spécialisés vin : au checkout, vos clients étrangers ne voient que des destinations réellement livrables, au bon prix ; après l'achat, la commande part chez le logisticien et le suivi revient tout seul.**

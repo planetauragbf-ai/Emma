@@ -1,104 +1,107 @@
-# Stratégie commerciale et marketing
+# Stratégie commerciale et marketing (V2)
+
+> Objectifs = entrées du business plan central (`outils/bp_model.py`, résultats dans `13_BP_V2_RESULTATS.md`). Organisation et management des équipes : `09_EQUIPE_MANAGEMENT.md`.
 
 ## 8.1 Segments prioritaires
 
-| Priorité | Segment | Taille estimée | Pourquoi |
-|---|---|---|---|
-| **1** | Domaines familiaux sur WooCommerce, ≥ 10 commandes étrangères/mois (UE + Royaume-Uni, Suisse, Asie) | ≈ 500-950 [HYP] | Douleur maximale, décision rapide (le propriétaire décide) |
-| **2** | Agences web WordPress qui gèrent ≥ 10 domaines | 20-50 en France [HYP] | Multiplicateur de distribution |
-| **3** | Logisticiens vin (Planet Aura, Hillebrand Gori, transitaires spécialisés, MBE…) | 10-20 | Fournisseurs d'API **et** payeurs potentiels (frais par expédition) |
-| 4 (an 2-3) | Domaines Shopify / PrestaShop ; producteurs italiens et espagnols | ×2,5 SAM | Croissance |
-| Exclu | Domaines sans boutique ; caves coopératives (circuits B2B) ; ventes vers particuliers américains | — | Pas le problème / interdit |
-
-## 8.2 ICP et personas
-
-**ICP (profil client idéal)** : domaine indépendant de 10-60 ha, 50 000-400 000 bouteilles/an, boutique WooCommerce active depuis ≥ 1 an, 10-80 commandes/mois dont ≥ 20 % hors France, au moins un logisticien vin déjà utilisé, 2-15 salariés.
-
-| Persona | Qui | Objectifs | Frustrations | Message clé | Objection probable → réponse |
-|---|---|---|---|---|---|
-| **Claire, 42 ans, vigneronne-gérante** (fictif) | 2ᵉ génération, gère commerce et export, peu de temps | Vendre plus en direct à l'étranger, garder la relation client | Ressaisies le soir, clients étrangers qui demandent « où est mon colis ? » | « Vos commandes étrangères partent sans ressaisie. » | « Mon logisticien le fait déjà par mail » → démo chronométrée : 12 min vs 1 min |
-| **Julien, 31 ans, responsable e-commerce** (fictif) | Salarié d'un domaine plus structuré | KPI conversion, taux d'abandon panier | Pays non livrables proposés, frais de port faux | « Plus aucun pays impossible au checkout. » | « Encore un plugin » → compatibilité testée, support FR |
-| **Sophie, 38 ans, dirigeante d'agence web** (fictif) | Agence WordPress, 25 domaines clients | Revenus récurrents, moins de SAV | Intégrations logistiques refaites à chaque client | « Une intégration maintenue, 20 % récurrent pour vous. » | « Mes clients sont petits » → offre Essentiel à 49 € |
-| **Marc, directeur commercial d'un logisticien** (fictif) | Logisticien vin | Plus d'expéditions, onboarding plus rapide | Coût des intégrations sur mesure | « Vos API dans des centaines de boutiques sans développer. » | « Pourquoi pas notre propre plugin ? » → Hillebrand l'a fait : < 10 installations |
-
-*Personas illustratifs construits à partir des hypothèses ; à remplacer par des personas issus des 25 entretiens.*
-
-## 8.3 Acquisition des premiers clients (an 1)
-
-1. **Réseau terrain du fondateur — hors fichiers Planet Aura** : salons, syndicats d'appellation, Vignerons Indépendants, réseau personnel.
-2. **Pilotes** : 5 domaines, installation à 190 € (au lieu de 490 €), 3 mois d'abonnement offerts contre mesures avant/après et témoignage.
-3. **Prospection ciblée** : liste de domaines WooCommerce construite par scan technique public de sites (Wappalyzer) + filtre « livraison internationale » ; séquence LinkedIn + e-mail + appel (RGPD B2B : intérêt légitime, opposition facile).
-4. **Contenu** : guide « Expédier du vin à des particuliers en Europe : ce qui a changé depuis 2023 » (aimant à prospects) ; webinaires avec un logisticien partenaire.
-5. **Fiche wordpress.org** gratuite (version « suivi seul ») → freemium d'acquisition.
-
-## 8.4 Développer le réseau de partenaires (an 2-3)
-
-| Étape | An 2 | An 3 |
-|---|---|---|
-| Agences actives | 3 | 8 |
-| Part des nouveaux clients via agences | 20 % | 35 % |
-| Logisticiens intégrés | 2-3 | ≥ 3 |
-| Programme | Kit partenaire, certification 2 h, compte démo, 20 % récurrent | Annuaire, co-marketing, niveau « Gold » (> 15 clients) : 25 % |
-
-## 8.5 Salons et événements
-
-| Événement | Dates | Lieu | Usage | Budget |
+| Priorité | Segment | SAM [HYP] | Quand | Pourquoi |
 |---|---|---|---|---|
-| Vinitech-Sifel | 1-3 déc. 2026 | Bordeaux | Visiteur : entretiens phase 1, agences, logisticiens | 600 € |
-| Salon des Vignerons Indépendants Paris | 10-13 déc. 2026 | Paris | Visiteur : entretiens domaines | 400 € |
-| Millésime Bio | 25-27 janv. 2027 | Montpellier | Visiteur : domaines bio (62 % en circuit court) | 600 € |
-| Wine Paris & Vinexpo Paris | 15-17 févr. 2027 (à confirmer) | Paris | Démos prototype, pré-ventes, logisticiens | 1 000 € |
-| ProWein | 7-9 mars 2027 | Düsseldorf | An 2-3 : logisticiens européens | an 2 |
-| Salons régionaux / AG de syndicats | toute l'année | — | Ateliers de 20 min | 300 €/événement |
+| **1** | Domaines français sur WooCommerce, ventes à l'étranger | ≈ 960 | M5 | Terrain du fondateur, douleur la plus forte, décision rapide |
+| **2** | Domaines français sur Shopify puis PrestaShop | +1 080 | M18 / M25 | Même cible, CMS différent |
+| **3** | Domaines italiens (Woo → Shopify → PrestaShop) | ≈ 945 | M17 | 2ᵉ exportateur européen (7,8 Md€), dense en petits producteurs |
+| **4** | Bodegas espagnoles et caves portugaises | ≈ 410 + 150 | M20 | 3 925 bodegas, WooCommerce et PrestaShop dominants |
+| **5** | Logisticiens vin européens (offre Partner) | 15-30 [HYP] | M15 | Panier élevé ; activation de domaines sans coût d'acquisition |
+| 6 | Allemagne (domaines) | ≈ 185 | M30, via agences et logisticiens seulement | Surtout un pays de destination |
+| Exclu | Domaines sans boutique ; caves coopératives (B2B) ; envois directs à des particuliers aux États-Unis | — | — | Pas le problème ou interdit |
 
-*Dates issues des sites officiels ou d'annuaires, à reconfirmer.* Pas de stand payant en an 1 (5-15 k€) : la valeur est dans les rendez-vous, pas dans la visibilité.
+## 8.2 ICP et personas (illustratifs)
 
-## 8.6 Démonstration commerciale (25 min)
+**ICP Direct** : domaine indépendant de 10 à 60 ha, 50 000 à 400 000 bouteilles/an, boutique WooCommerce, Shopify ou PrestaShop active depuis au moins 1 an, 10 à 80 commandes/mois dont au moins 20 % hors du pays, déjà client d'au moins un logisticien vin.
+**ICP Partner** : logisticien spécialisé vin qui expédie à des particuliers dans au moins 5 pays, compte au moins 100 domaines clients vendant en ligne, et n'a pas de plugin (ou un plugin peu adopté).
 
-1. (3 min) Questions de découverte : volumes, pays, outils.
-2. (5 min) **Avant** : chronométrer avec le prospect sa dernière commande étrangère.
-3. (10 min) **Après** : boutique démo → checkout depuis la Suisse, l'Allemagne, Singapour (un pays non livrable masqué) → commande transmise → suivi qui remonte.
-4. (4 min) Calcul du gain personnalisé (heures/mois × coût horaire + ventes sauvées).
-5. (3 min) Proposition : pilote ou offre, date d'installation.
+| Persona (fictif) | Qui | Frustration | Message clé | Objection → réponse |
+|---|---|---|---|---|
+| **Claire, 42 ans, vigneronne-gérante** (Loire) | 2ᵉ génération, gère le commerce et l'export | Ressaisies le soir, « où est mon colis ? » | « Vos commandes étrangères partent sans ressaisie. » | « Mon logisticien le fait par mail » → démo chronométrée : 12 min contre 1 min |
+| **Marco, 38 ans, responsable commercial** d'une cave de Valpolicella | Boutique WooCommerce, clients allemands et suisses | Pays non livrables proposés, accises mal estimées | « Plus aucun pays impossible au panier. » | « Un outil français ? » → interface et support en italien, logisticiens italiens intégrés |
+| **Sophie, 38 ans, dirigeante d'agence web** | 25 domaines clients sur WordPress ou Shopify | Intégrations logistiques refaites à chaque client | « Une intégration maintenue, 20 à 25 % de commission récurrente. » | « Mes clients sont petits » → offre Essentiel à 49 € |
+| **Marc, directeur commercial d'un logisticien** | 300 domaines clients | Coût d'un plugin maison, peu adopté | « Votre connecteur à votre marque en 8 semaines, sans équipe de développement. » | « On le fera nous-mêmes » → 69 k€ la 1ʳᵉ année pour 2 CMS contre 25,9 k€ ; l'exemple d'un plugin à moins de 10 installations |
 
-## 8.7 Argumentaire (pitch 30 secondes)
+*À remplacer par des personas issus des entretiens de validation (25 en France, 10 en Italie, 8 en Espagne).*
 
-> « Aujourd'hui, chaque commande étrangère vous coûte environ un quart d'heure de ressaisie, et votre boutique propose parfois des pays où aucun logisticien ne livre votre vin. Passavin branche votre WooCommerce à vos logisticiens vin : au panier, vos clients ne voient que les destinations possibles au bon prix, puis la commande part et le suivi revient automatiquement. 49 € par mois, installé en une heure. »
+## 8.3 Étapes clés (déclinaison de la vision)
 
-## 8.8 Cycle de vente
+| Période | Étape | Jalon mesurable |
+|---|---|---|
+| Nov. 2026 - fév. 2027 | Validation France | 25 entretiens, 8 pré-ventes avec acompte, 2 logisticiens prêts à signer |
+| M1-M4 (janv.-avr. 2027) | MVP WooCommerce | 2 adaptateurs logisticiens en production |
+| M5-M12 | Pilotes puis commercialisation en France | 32 domaines actifs ; 1 lettre d'intention de licence ; **seed à M12** |
+| M13-M18 | Structuration : partner manager, sales Italie, Shopify | 1ʳᵉ licence marque blanche (M15) ; Shopify à M18 ; 83 domaines |
+| M19-M24 | Espagne et Portugal | 187 domaines ; 2 licences ; 9 agences |
+| M25-M30 | PrestaShop ; customer success IT/ES | 330 domaines ; 18 agences |
+| M31-M36 | Allemagne et Portugal via le réseau ; 4ᵉ licence | 478 domaines + 137 en marque blanche ; 725 k€ de revenu récurrent annualisé |
+
+## 8.4 Canaux par pays et par ressource
+
+| Canal | France | Italie | Espagne / Portugal | Allemagne |
+|---|---|---|---|---|
+| Vente directe | Dirigeant (an 1) puis Sales France | Sales Italie (M17) | Sales ES-PT (M20) | — |
+| Agences | 2 → 14 (dont 4 Gold) | 1 → 5 | 1 → 5 (dont 1 au Portugal) | 2 |
+| Apporteurs | 3 → 12 | 2 → 4 | 2 → 4 | — |
+| Logisticiens revendeurs | Licences multi-pays : 4 à M36 (cibles : logisticiens français, italiens, espagnols et un acteur européen) | | | |
+| Inbound | Fiche wordpress.org (version « suivi seul » gratuite), App Store Shopify, guide sur la vente à distance de vin dans l'UE (accises depuis 2023), webinaires avec des logisticiens | Contenus traduits | Contenus traduits | Contenus EN/DE |
+
+## 8.5 Cycle de vente (domaine)
 
 | Étape | Délai | Taux de passage [HYP] | Responsable | Outil |
 |---|---|---|---|---|
-| Prospect identifié → contact établi | J0-J7 | 30 % | Alternant·e / CEO | CRM |
-| Contact → démo | J7-J21 | 50 % | CEO | Visio |
-| Démo → essai/pilote | J21-J35 | 40 % | CEO | Boutique démo |
-| Essai → client payant | J35-J60 | 60 % | CEO / onboarding | Stripe |
-| **Global** : 100 prospects → **3,6 clients** ; cycle ≈ 6-8 semaines | | | | |
+| Prospect identifié → contact établi | J0-J7 | 30 % | Alternant·e SDR | CRM, séquences |
+| Contact → démo | J7-J21 | 50 % | Sales | Visio |
+| Démo → essai ou pilote | J21-J35 | 50 % | Sales | Boutique de démo |
+| Essai → client payant | J35-J60 | 50 % | Sales puis customer success | Stripe |
+| **Global** | **6-8 semaines** | **100 prospects → ≈ 3,75 clients** | | |
 
-→ 9 nouveaux clients/mois en an 3 exigent ≈ 250 prospects contactés/mois (dont 35 % des clients via agences, ce qui réduit ce volume).
+Un·e sales à pleine productivité (≈ 6-8 signatures/mois) fait ≈ 30 démos/mois, soit ≈ 200 prospects contactés/mois : d'où l'alternant·e SDR. **Logisticien** : cycle de 6-9 mois, du premier rendez-vous à la signature (comité de direction, essai technique).
 
-## 8.9 Budget d'acquisition
+## 8.6 Marketing : budget et événements
 
-| | An 1 | An 2 | An 3 |
+| Poste (k€) | An 1 | An 2 | An 3 |
 |---|---|---|---|
-| Salons & déplacements | 5 000 € | 12 000 € | 15 000 € |
-| Contenus, webinaires, site | 3 000 € | 6 000 € | 8 000 € |
-| Outils commerciaux (CRM, données, LinkedIn) | 1 500 € | 4 000 € | 6 000 € |
-| Publicité ciblée (tests) | 1 000 € | 4 000 € | 8 000 € |
-| Programme partenaires / co-marketing | 1 500 € | 4 000 € | 8 000 € |
-| **Total marketing** | **12 000 €** | **30 000 €** | **45 000 €** |
-| + salaires commerciaux | 0 € | 12 000 € (alternance) | 74 000 € |
+| Marketing (salons, contenus, outils, publicité test) | 12 | 40 | 60 |
+| Programme partenaires (certification, challenges, co-marketing) | 1,5 | 8 | 15 |
+| Déplacements commerciaux | 3 | 10 | 18 |
+| Localisation (IT, ES, DE, PT : interface, CGV, DPA) | 0 | 12 | 8 |
+| **Total** | **16,5** | **70** | **101** |
 
-## 8.10 Objectifs commerciaux sur 3 ans (scénario central)
+| Événement | Lieu | Usage | Statut des dates |
+|---|---|---|---|
+| Vinitech-Sifel (déc. 2026) | Bordeaux | Entretiens, agences, logisticiens | À reconfirmer |
+| Wine Paris & Vinexpo Paris (févr.) | Paris | Démos, pré-ventes, logisticiens | À reconfirmer |
+| ProWein (mars) | Düsseldorf | Logisticiens européens, agences allemandes | À reconfirmer |
+| **Vinitaly (avril 2028)** | Vérone | Lancement Italie (visiteurs, rendez-vous pris d'avance) | À reconfirmer |
+| Fenavin / Barcelona Wine Week (biennaux) | Ciudad Real / Barcelone | Lancement Espagne | Années à reconfirmer |
+| Assemblées des syndicats d'appellation | Toute l'année | Ateliers de 20 min (apporteurs) | — |
+
+Pas de stand payant avant l'an 3 : la valeur est dans les rendez-vous préparés.
+
+## 8.7 Pourquoi maintenant
+
+1. **Les exportations baissent** : vins et spiritueux français −8 % en 2025, Italie −3,7 %, Espagne −5 % [FAIT, FEVS, ISTAT, AEAT]. Les droits américains de 15 % depuis août 2025 poussent les domaines vers la **vente directe en Europe**, où l'expédition aux particuliers est autorisée mais complexe.
+2. **La vente à distance intra-UE** impose depuis 2023 les accises du pays de destination (directive (UE) 2020/262) : il faut un logisticien spécialisé, donc un connecteur.
+3. **Les logisticiens se lancent seuls** : MBE Wine for Europe (juin 2026), plugin Hillebrand Gori. Le créneau neutre et multi-logisticiens est encore libre, mais pas pour longtemps.
+4. **Les boutiques existent** : 79 % des viticulteurs français ont un site, 21 % vendent en ligne (Afnic 2025) ; en Allemagne, 46 % du CA des domaines vient de la vente directe (DWI/Geisenheim 2024).
+
+## 8.8 Objectifs commerciaux sur 3 ans (central)
 
 | Objectif | An 1 (2027) | An 2 (2028) | An 3 (2029) |
 |---|---|---|---|
-| Nouveaux clients | 22 | 72 | 108 |
-| Clients actifs fin d'année | 21 | 84 | 170 |
-| ARR fin d'année | 23 k€ | 90 k€ | 181 k€ |
-| Agences actives | 0 | 3 | 8 |
-| Logisticiens intégrés | 2 | 2-3 | ≥ 3 |
-| CMS | WooCommerce | WooCommerce | + Shopify (bêta) |
-| Moyens humains | CEO + freelance | CEO, dév., alternant·e | + business developer |
+| Nouveaux domaines Direct | 33 | 170 | 348 |
+| Domaines Direct actifs fin d'année | 32 | 187 | 478 |
+| dont France / Italie / Espagne / Allemagne / Portugal | 32 / 0 / 0 / 0 / 0 | 143 / 32 / 12 / 0 / 0 | 289 / 108 / 75 / 4 / 2 |
+| Licences marque blanche / domaines activés | 0 / 0 | 2 / 27 | 4 / 137 |
+| Revenu récurrent annualisé fin d'année | 42 k€ | 284 k€ | 725 k€ |
+| CA | 27 k€ | 232 k€ | 649 k€ |
+| Agences actives / apporteurs actifs | 2 / 3 | 9 / 13 | 27 / 20 |
+| CMS | WooCommerce | + Shopify (M18) | + PrestaShop (M25) |
+| Effectif | 3 | 9 | 11 |
 
-Chaque objectif est directement l'entrée du business plan (`07_BUSINESS_MODEL_BP.md` §7.4) : aucune ligne de chiffre d'affaires sans ressource commerciale qui la produit.
+Chaque objectif est l'entrée directe du BP : aucune ligne de chiffre d'affaires sans ressource qui la produit (`07_BUSINESS_MODEL_BP.md` §7.4).

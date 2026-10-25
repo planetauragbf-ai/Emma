@@ -1,5 +1,7 @@
 # Étape 4 — Étude de marché et concurrence
 
+> **Note V2** : cette étude couvre la France. Le marché européen (Italie, Espagne, Allemagne, Portugal), les parts de CMS par pays, le TAM/SAM/SOM V2 (SAM ≈ 3 730 domaines) et les nouveaux concurrents (MBE Wine for Europe, Tannico WinePlatform) sont dans `12_V2_EUROPE.md`. Le tableau §4.4 ci-dessous est celui de la V1, conservé pour la traçabilité.
+
 > Recherche documentaire réalisée en octobre 2026. Fiabilité : **OFF** = source officielle · **ÉP** = étude privée · **DÉC** = déclaratif d'entreprise · **PR** = presse · **NV** = non vérifié.
 
 ## 4.1 Secteur viticole français
