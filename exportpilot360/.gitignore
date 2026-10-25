@@ -1,0 +1,5 @@
+build/png_*/
+build/*.html
+build/notes.json
+finance/_*.xlsx
+finance/*_map.json
