@@ -11,6 +11,7 @@ Dépôt de travail. Nom de la société non arrêté (jamais dans les noms de fi
 | `docs/02_VALIDATION_FAITS.md` | Fact-checking sourcé de chaque statistique (verdicts + formulations autorisées) |
 | `docs/03_CONCURRENCE.md` | Étude concurrentielle France (Filib', Epsor, Rosaly, Wagestream, Klaro…) |
 | `docs/04_BENCHMARKS.md` | Benchmarks US/UK, ancrage prix QVT France, taux d'adoption réels |
+| `docs/09_RECHERCHE_PROJETS.md` | Analyse CDC/grilles/anciens dossiers + 15 idées de projets notées, top 5 approfondi, recommandation |
 | `annexes/` | (à venir) BP xlsx complet, tableaux de bord de pilotage |
 | `pitch/` | (à venir) pitch deck ≤ 20 slides + trame minutée |
 | `maquette/` | (à venir) maquette interactive du logiciel |
