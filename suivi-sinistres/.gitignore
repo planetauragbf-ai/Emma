@@ -1,7 +1,0 @@
-# Jamais de données clients dans le dépôt
-*.original.html
-Suivi_des_sinistres*.html
-sauvegarde*.json
-seed*.json
-node_modules/
-supabase/.temp/

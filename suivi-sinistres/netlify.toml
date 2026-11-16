@@ -1,4 +1,0 @@
-# Netlify : site statique, aucun build. Les en-têtes de sécurité sont dans public/_headers.
-[build]
-  publish = "public"
-  command = ""
