@@ -1,0 +1,23 @@
+rules_version = '2';
+// Fichiers joints : lecture authentifiée uniquement (pas de lien public), pas de listing,
+// envoi réservé à l'équipe, 25 Mo maximum par fichier.
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Si le membre n'existe pas, firestore.get() renvoie null et la règle refuse.
+    function hasRole(rs) {
+      return request.auth != null && request.auth.token.email_verified == true
+        && firestore.get(/databases/(default)/documents/members/$(request.auth.token.email.lower())).data.role in rs;
+    }
+
+    match /assets/{id} {
+      allow get: if hasRole(['admin', 'staff', 'cf']);
+      allow list: if false;
+      allow create: if hasRole(['admin', 'staff']) && request.resource.size < 25 * 1024 * 1024;
+      allow update: if false;
+      allow delete: if hasRole(['admin']);
+    }
+    match /{all=**} {
+      allow read, write: if false;
+    }
+  }
+}

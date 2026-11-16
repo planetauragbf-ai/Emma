@@ -14,6 +14,7 @@ Dépôt de travail. Nom de la société non arrêté (jamais dans les noms de fi
 | `annexes/` | (à venir) BP xlsx complet, tableaux de bord de pilotage |
 | `pitch/` | (à venir) pitch deck ≤ 20 slides + trame minutée |
 | `maquette/` | (à venir) maquette interactive du logiciel |
+| `suivi-sinistres/` | Application Planet’Claim (suivi des sinistres) prête à héberger sur Firebase — voir `suivi-sinistres/GUIDE.md` |
 
 ## Règles de travail
 
