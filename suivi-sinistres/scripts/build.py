@@ -7,16 +7,14 @@ Usage :  python3 scripts/build.py chemin/vers/Suivi_des_sinistres.html
 - vide les données d'exemple embarquées (const SEED=[...]) : elles contiennent des
   données clients et seraient lisibles par n'importe qui, sans connexion. Elles se
   réimportent dans la base via admin.html ;
-- branche Firebase (SDK + firebase-config.js + runtime.js) avant le script de l'app.
+- branche Supabase (bibliothèque + supabase-config.js + runtime.js) avant le script de l'app.
 Le fichier d'origine ne doit pas être versionné (voir .gitignore).
 """
 import json, re, sys, pathlib
 
-FIREBASE = "10.14.1"
 INJECT = "\n".join([
-    *[f'<script src="https://www.gstatic.com/firebasejs/{FIREBASE}/firebase-{m}-compat.js"></script>'
-      for m in ("app", "auth", "firestore", "storage")],
-    '<script src="firebase-config.js"></script>',
+    '<script src="vendor/supabase-2.45.4.js"></script>',
+    '<script src="supabase-config.js"></script>',
     '<script src="runtime.js"></script>',
     "",
 ])

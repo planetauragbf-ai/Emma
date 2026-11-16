@@ -21,7 +21,7 @@ table{width:100%;border-collapse:collapse;margin-top:12px}td,th{text-align:left;
 <h1>Administration</h1><p class="m" id="who"></p>
 
 <section><h2>Accès</h2>
-<p class="m">Seules les adresses listées ici peuvent se connecter. <b>staff</b> = équipe (lecture/écriture), <b>cf</b> = Coste Fermon (espace partagé en lecture), <b>admin</b> = gestion complète.</p>
+<p class="m">Seules les adresses listées ici ont accès (le compte de connexion se crée dans Supabase, voir le guide). <b>staff</b> = équipe (lecture/écriture), <b>cf</b> = Coste Fermon (espace partagé en lecture), <b>admin</b> = gestion complète.</p>
 <form id="add" class="row"><input id="a-e" type="email" placeholder="e-mail" required><input id="a-n" placeholder="Nom affiché"><select id="a-r"><option>staff</option><option>cf</option><option>admin</option></select><button>Ajouter</button></form>
 <div class="tw"><table><thead><tr><th>E-mail</th><th>Nom</th><th>Rôle</th><th></th></tr></thead><tbody id="mem"></tbody></table></div>
 </section>
@@ -39,11 +39,8 @@ table{width:100%;border-collapse:collapse;margin-top:12px}td,th{text-align:left;
 <button id="b-exp">Exporter la base</button>
 </section>
 </main>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
-<script src="firebase-config.js"></script>
+<script src="vendor/supabase-2.45.4.js"></script>
+<script src="supabase-config.js"></script>
 <script src="runtime.js"></script>
 <script src="admin.js"></script>
 </body></html>

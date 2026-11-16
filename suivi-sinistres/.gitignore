@@ -3,6 +3,5 @@
 Suivi_des_sinistres*.html
 sauvegarde*.json
 seed*.json
-.firebase/
-firebase-debug.log
 node_modules/
+supabase/.temp/

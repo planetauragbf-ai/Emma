@@ -1,104 +1,166 @@
-/* Planet'Claim — couche d'exécution autonome.
-   Remplace l'environnement claude.ai (window.claude.use) par Firebase :
-     - 'db'     -> Cloud Firestore (même API collection/doc/onSnapshot)
-     - 'assets' -> Cloud Storage (fichiers joints, lus avec le jeton de connexion)
-     - 'user'   -> Firebase Authentication + rôles (collection members)
+/* Planet'Claim — couche d'exécution autonome (Supabase).
+   Remplace l'environnement claude.ai (window.claude.use) :
+     - 'db'     -> table public.docs (API collection/doc/onSnapshot reproduite, temps réel)
+     - 'assets' -> Supabase Storage, compartiment privé "assets"
+     - 'user'   -> Supabase Auth + rôles (table public.members)
    'mcp' (Gmail), 'sample' (IA) et 'comments' ne sont pas disponibles : l'application
    bascule d'elle-même sur ses solutions de repli (mailto, boutons masqués).
-   Rien n'est accessible tant que l'utilisateur n'est pas connecté ET inscrit dans members. */
+   Les droits sont appliqués par la base (supabase/schema.sql), pas seulement par l'écran. */
 (function () {
   'use strict';
-  const cfg = window.FIREBASE_CONFIG;
-  if (!cfg || !cfg.apiKey || cfg.apiKey === 'A_REMPLIR') {
+  const cfg = window.SUPABASE_CONFIG || {};
+  if (!cfg.url || /A_REMPLIR/.test(cfg.url + cfg.anonKey)) {
     window.claude = { use: async () => null };
-    const show = () => { const d = document.createElement('div'); d.style.cssText = 'position:fixed;inset:0;z-index:2147483646;background:#f1f6f7;display:flex;align-items:center;justify-content:center;font:15px sans-serif;padding:16px;text-align:center'; d.textContent = 'Configuration manquante : remplissez public/firebase-config.js (voir GUIDE.md, étape 3).'; document.body.appendChild(d); };
+    const show = () => { const d = document.createElement('div'); d.style.cssText = 'position:fixed;inset:0;z-index:2147483646;background:#f1f6f7;display:flex;align-items:center;justify-content:center;font:15px sans-serif;padding:16px;text-align:center'; d.textContent = 'Configuration manquante : remplissez public/supabase-config.js (voir GUIDE.md, étape 3).'; document.body.appendChild(d); };
     if (document.body) show(); else document.addEventListener('DOMContentLoaded', show);
     return;
   }
-  firebase.initializeApp(cfg);
-  const auth = firebase.auth();
-  const fs = firebase.firestore();
-  fs.settings({ ignoreUndefinedProperties: true });
-  const st = firebase.storage();
-  auth.languageCode = 'fr';
-  // Tests locaux uniquement (émulateurs Firebase) : window.FIREBASE_EMULATORS = true dans firebase-config.js
-  const EMU = window.FIREBASE_EMULATORS === true && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-  if (EMU) { auth.useEmulator('http://127.0.0.1:9099'); fs.useEmulator('127.0.0.1', 8080); st.useEmulator('127.0.0.1', 9199); }
-  const STORAGE_API = EMU ? 'http://127.0.0.1:9199' : 'https://firebasestorage.googleapis.com';
+  // Lien d'invitation ou de réinitialisation : on le repère avant que la bibliothèque ne nettoie l'adresse.
+  const LM = /type=(recovery|invite)/.exec(location.hash), LINK = LM ? LM[1] : null;
+  const sb = window.supabase.createClient(cfg.url, cfg.anonKey, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
 
   /* ---------- session ---------- */
-  let SESSION = null; // {user, role, name, email}
+  let SESSION = null; // {uid, email, role, name}
   let readyRes; const ready = new Promise(r => (readyRes = r));
-  const ROLES = ['admin', 'staff', 'cf'];
+  let booting = false, pwMode = LINK;
 
-  auth.onAuthStateChanged(async u => {
-    if (!u) { if (SESSION) location.reload(); return gate(); }
-    if (!u.emailVerified) return gateVerify(u);
-    const email = (u.email || '').toLowerCase();
-    let m = null;
-    try { const s = await fs.doc('members/' + email).get(); m = s.exists ? s.data() : null; } catch (e) { m = null; }
-    if (!m || !ROLES.includes(m.role)) return gate('Le compte ' + email + " n'est pas autorisé. Demandez à l'administrateur de vous ajouter.", true);
-    SESSION = { user: u, role: m.role, name: m.name || u.displayName || email, email };
-    try { await fs.doc('profiles/' + u.uid).set({ name: SESSION.name, email, role: m.role, seen: Date.now() }); } catch (e) {}
-    ungate(); readyRes(SESSION);
+  async function boot(user) {
+    if (booting || SESSION) return; booting = true;
+    try {
+      const email = (user.email || '').toLowerCase();
+      const { data: m } = await sb.from('members').select('role,name').eq('email', email).maybeSingle();
+      if (!m) return gate('Le compte ' + email + " n'est pas autorisé. Demandez à l'administrateur de vous ajouter.", true);
+      const name = m.name || (user.user_metadata && (user.user_metadata.full_name || user.user_metadata.name)) || email;
+      await sb.from('profiles').upsert({ uid: user.id, name, email, role: m.role, seen: Date.now() });
+      if (pwMode) return gatePassword(user, () => { pwMode = null; booting = false; boot(user); });
+      SESSION = { uid: user.id, email, role: m.role, name };
+      ungate(); live(); readyRes(SESSION);
+    } finally { booting = false; }
+  }
+  sb.auth.onAuthStateChange((ev, s) => {
+    if (ev === 'PASSWORD_RECOVERY') pwMode = 'recovery';
+    if (ev === 'SIGNED_OUT') { if (SESSION) location.reload(); else gate(); return; }
+    if (s && s.user) setTimeout(() => boot(s.user), 0); // hors du rappel (recommandation supabase-js)
+    else if (ev === 'INITIAL_SESSION') gate();
   });
 
-  /* ---------- encodage : chaque document est stocké en JSON (_j) ----------
-     Évite les limites Firestore (tableaux imbriqués, valeurs undefined) et restitue
-     exactement l'objet écrit par l'application. 'ts' est recopié pour orderBy(). */
-  const enc = d => { const o = { _j: JSON.stringify(d == null ? {} : d), _u: SESSION ? SESSION.user.uid : '', _at: Date.now() }; if (d && typeof d.ts === 'number') o.ts = d.ts; return o; };
-  const dec = raw => (raw && typeof raw._j === 'string') ? JSON.parse(raw._j) : raw;
+  /* ---------- base : documents ---------- */
+  const CACHE = new Map();              // col -> Map(id -> data)
+  const LISTENERS = new Set();          // {col, id?, order?, lim?, cb, err}
+  const colMap = c => { if (!CACHE.has(c)) CACHE.set(c, new Map()); return CACHE.get(c); };
+  const clone = o => (o == null ? o : JSON.parse(JSON.stringify(o)));
+  const META = { fromCache: false, hasPendingWrites: false };
+  const split = p => { const s = String(p).split('/').filter(Boolean); if (s.length !== 2) throw new Error('Chemin invalide : ' + p); return s; };
+  const fail = (e) => { const x = new Error(e.message || String(e)); x.code = e.code === '42501' || /row-level security|permission/i.test(e.message || '') ? 'permission-denied' : (e.code || 'unknown'); return x; };
+  const rid = () => (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()).replace(/[^a-z0-9]/gi, '');
 
-  const wDoc = s => ({ id: s.id, exists: s.exists, ref: new DocRef(s.ref), metadata: s.metadata, data: () => (s.exists ? dec(s.data()) : undefined) });
-  const wQuery = q => ({ docs: q.docs.map(wDoc), empty: q.empty, size: q.size, metadata: q.metadata, forEach(f) { this.docs.forEach(f); } });
+  const snapDoc = (col, id, data) => ({ id, exists: data !== undefined, metadata: META, ref: new DocRef(col, id), data: () => (data === undefined ? undefined : clone(data)) });
+  function snapQuery(L) {
+    let rows = [...colMap(L.col).entries()];
+    if (L.order) { const [f, d] = L.order, k = d === 'desc' ? -1 : 1; rows.sort((a, b) => { const x = a[1] && a[1][f], y = b[1] && b[1][f]; return x === y ? 0 : (x === undefined ? 1 : y === undefined ? -1 : (x < y ? -k : k)); }); }
+    if (L.lim) rows = rows.slice(0, L.lim);
+    const docs = rows.map(([id, d]) => snapDoc(L.col, id, d));
+    return { docs, empty: !docs.length, size: docs.length, metadata: META, forEach(f) { docs.forEach(f); } };
+  }
+  function emit(col, id) {
+    for (const L of LISTENERS) {
+      if (L.col !== col || (L.id && id && L.id !== id) || !L.loaded) continue;
+      try { L.cb(L.id ? snapDoc(col, L.id, colMap(col).get(L.id)) : snapQuery(L)); } catch (e) { console.error(e); }
+    }
+  }
+  const put = (col, id, data) => { if (data === undefined) colMap(col).delete(id); else colMap(col).set(id, data); emit(col, id); };
+
+  async function fetchCol(col) {
+    const out = new Map(); let from = 0;
+    for (;;) {
+      const { data, error } = await sb.from('docs').select('id,data').eq('col', col).order('id').range(from, from + 999);
+      if (error) throw fail(error);
+      data.forEach(r => out.set(r.id, r.data)); if (data.length < 1000) break; from += 1000;
+    }
+    CACHE.set(col, out); return out;
+  }
+  async function fetchDoc(col, id) {
+    const { data, error } = await sb.from('docs').select('data').eq('col', col).eq('id', id).maybeSingle();
+    if (error) throw fail(error);
+    if (data) colMap(col).set(id, data.data); else colMap(col).delete(id);
+    return data ? data.data : undefined;
+  }
+  async function load(L) {
+    try { if (L.id) await fetchDoc(L.col, L.id); else await fetchCol(L.col); L.loaded = true; emit(L.col, L.id); }
+    catch (e) { L.err && L.err(e); }
+  }
+  function listen(L) { LISTENERS.add(L); ready.then(() => load(L)); return () => LISTENERS.delete(L); }
+
+  // Temps réel : un seul canal pour toute la table ; resynchronisation complète à chaque reconnexion.
+  let chan = null, wasDown = false;
+  function live() {
+    chan = sb.channel('docs-all')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'docs' }, p => {
+        if (p.eventType === 'DELETE') { const o = p.old || {}; if (o.col) put(o.col, o.id, undefined); }
+        else if (p.new && p.new.col) put(p.new.col, p.new.id, p.new.data);
+      })
+      .subscribe(st => {
+        if (st === 'SUBSCRIBED' && wasDown) { wasDown = false; LISTENERS.forEach(load); }
+        if (st === 'CHANNEL_ERROR' || st === 'TIMED_OUT' || st === 'CLOSED') wasDown = true;
+      });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden && wasDown) LISTENERS.forEach(load); });
+  }
 
   class DocRef {
-    constructor(r) { this._r = r; this.id = r.id; this.path = r.path; }
-    async get() { return wDoc(await this._r.get()); }
-    set(d) { return this._r.set(enc(d)); }
-    async update(p) {
-      return fs.runTransaction(async t => { const s = await t.get(this._r); const cur = s.exists ? dec(s.data()) : {}; t.set(this._r, enc({ ...cur, ...p })); });
+    constructor(col, id) { this.col = col; this.id = id; this.path = col + '/' + id; }
+    async get() { await ready; return snapDoc(this.col, this.id, await fetchDoc(this.col, this.id)); }
+    async set(d) {
+      await ready;
+      const data = clone(d == null ? {} : d);
+      const { error } = await sb.from('docs').upsert({ col: this.col, id: this.id, data, ts: typeof data.ts === 'number' ? data.ts : null, updated_by: SESSION.uid, updated_at: new Date().toISOString() });
+      if (error) throw fail(error);
+      put(this.col, this.id, data); // affichage immédiat, sans attendre l'écho temps réel
     }
-    delete() { return this._r.delete(); }
-    onSnapshot(next, err) { return this._r.onSnapshot(s => next(wDoc(s)), err); }
-    collection(p) { return new Query(this._r.collection(p)); }
+    async update(p) { const cur = await fetchDoc(this.col, this.id); if (cur === undefined) { const e = new Error('Document introuvable'); e.code = 'not-found'; throw e; } return this.set({ ...cur, ...p }); }
+    async delete() {
+      await ready;
+      const { error } = await sb.from('docs').delete().eq('col', this.col).eq('id', this.id);
+      if (error) throw fail(error);
+      put(this.col, this.id, undefined);
+    }
+    onSnapshot(cb, err) { return listen({ col: this.col, id: this.id, cb, err }); }
   }
   class Query {
-    constructor(q) { this._q = q; this.id = q.id; this.path = q.path; }
-    doc(id) { return new DocRef(id ? this._q.doc(id) : this._q.doc()); }
-    async add(d) { const r = this._q.doc(); await r.set(enc(d)); return new DocRef(r); }
-    async get() { return wQuery(await this._q.get()); }
-    onSnapshot(next, err) { return this._q.onSnapshot(s => next(wQuery(s)), err); }
-    orderBy(f, dir) { return new Query(this._q.orderBy(f, dir)); }
-    limit(n) { return new Query(this._q.limit(n)); }
+    constructor(col, order, lim) { this.col = col; this.id = col; this.path = col; this._o = order; this._l = lim; }
+    doc(id) { return new DocRef(this.col, id || rid()); }
+    async add(d) { const r = this.doc(); await r.set(d); return r; }
+    async get() { await ready; const L = { col: this.col, order: this._o, lim: this._l }; await fetchCol(this.col); return snapQuery(L); }
+    onSnapshot(cb, err) { return listen({ col: this.col, order: this._o, lim: this._l, cb, err }); }
+    orderBy(f, d) { return new Query(this.col, [f, d || 'asc'], this._l); }
+    limit(n) { return new Query(this.col, this._o, n); }
   }
-  const DB = { doc: p => new DocRef(fs.doc(p)), collection: p => new Query(fs.collection(p)) };
+  const DB = {
+    doc: p => { const [c, i] = split(p); return new DocRef(c, i); },
+    collection: c => { if (String(c).includes('/')) throw new Error('Sous-collections non prises en charge'); return new Query(c); }
+  };
 
   /* ---------- fichiers ---------- */
-  const rid = () => (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()).replace(/[^a-z0-9]/gi, '');
   const ASSETS = {
     async upload(file, opts) {
       if (!SESSION || SESSION.role === 'cf') throw new Error('Envoi non autorisé');
       const id = rid(), type = (opts && opts.type) || file.type || 'application/octet-stream';
-      const meta = { contentType: type, customMetadata: { name: (file.name || 'fichier').slice(0, 200), by: SESSION.user.uid } };
-      await st.ref('assets/' + id).put(file, meta);
+      const { error } = await sb.storage.from('assets').upload(id, file, { contentType: type, upsert: false });
+      if (error) throw fail(error);
       return { id, sizeBytes: file.size, type };
     }
   };
   async function blobOf(id) {
     if (!/^[a-z0-9]{8,64}$/i.test(id)) throw new Error('Identifiant de fichier invalide');
     await ready;
-    const tok = await auth.currentUser.getIdToken();
-    const url = STORAGE_API + '/v0/b/' + encodeURIComponent(cfg.storageBucket) + '/o/' + encodeURIComponent('assets/' + id) + '?alt=media';
-    const r = await fetch(url, { headers: { Authorization: 'Firebase ' + tok } });
-    if (!r.ok) throw new Error('Fichier inaccessible (' + r.status + ')');
-    return r.blob();
+    const { data, error } = await sb.storage.from('assets').download(id);
+    if (error) throw new Error('Fichier inaccessible');
+    return data;
   }
   // L'application utilise des liens "/_blob/<id>" : on les intercepte.
   const nativeFetch = window.fetch.bind(window);
   window.fetch = (u, o) => {
     const s = typeof u === 'string' ? u : (u && u.url) || '';
-    const m = /\/_blob\/([^/?#]+)/.exec(s);
+    const m = /^(?:https?:\/\/[^/]+)?\/_blob\/([^/?#]+)/.exec(s);
     if (m && (s.startsWith('/_blob/') || s.startsWith(location.origin + '/_blob/'))) return blobOf(m[1]).then(b => new Response(b, { status: 200, headers: { 'Content-Type': b.type } }));
     return nativeFetch(u, o);
   };
@@ -115,19 +177,17 @@
 
   /* ---------- utilisateur ---------- */
   const USER = {
-    async me() { return { id: SESSION.user.uid, name: SESSION.name }; },
+    async me() { return { id: SESSION.uid, name: SESSION.name }; },
     async profiles(ids) {
-      const out = {};
-      await Promise.all([...new Set(ids || [])].filter(Boolean).map(async id => {
-        try { const s = await fs.doc('profiles/' + id).get(); if (s.exists) out[id] = { name: s.data().name || '' }; } catch (e) {}
-      }));
-      if (SESSION && ids && ids.includes(SESSION.user.uid)) out[SESSION.user.uid] = { name: SESSION.name };
+      const out = {}, L = [...new Set(ids || [])].filter(x => /^[0-9a-f-]{36}$/i.test(x));
+      if (L.length) { const { data } = await sb.from('profiles').select('uid,name').in('uid', L); (data || []).forEach(p => (out[p.uid] = { name: p.name })); }
+      if (SESSION && (ids || []).includes(SESSION.uid)) out[SESSION.uid] = { name: SESSION.name };
       return out;
     },
     async search(q) {
-      const n = String(q || '').toLowerCase();
-      try { const s = await fs.collection('profiles').get(); return s.docs.map(d => ({ id: d.id, ...d.data() })).filter(p => (p.name + ' ' + p.email).toLowerCase().includes(n)).slice(0, 20).map(p => ({ id: p.id, name: p.name || p.email })); }
-      catch (e) { return []; }
+      const n = String(q || '').replace(/[%_,()]/g, ' ').trim();
+      const { data } = await sb.from('profiles').select('uid,name,email').or(`name.ilike.%${n}%,email.ilike.%${n}%`).limit(20);
+      return (data || []).map(p => ({ id: p.uid, name: p.name || p.email }));
     },
     async canEdit() { return SESSION.role === 'admin'; },
     async isOwner() { return SESSION.role === 'admin'; },
@@ -143,9 +203,9 @@
       return null; // mcp, sample, comments : non disponibles hors claude.ai
     }
   };
-  window.PCRT = { auth, fs, enc, dec, ready, session: () => SESSION, signOut: () => auth.signOut() };
+  window.PCRT = { sb, ready, session: () => SESSION, signOut: () => sb.auth.signOut() };
 
-  /* ---------- écran de connexion ---------- */
+  /* ---------- écrans de connexion ---------- */
   const CSS = `#pcg{position:fixed;inset:0;z-index:2147483646;display:flex;align-items:center;justify-content:center;background:var(--bg,#f1f6f7);color:var(--ink,#0b2530);font:14px/1.5 Poppins,system-ui,sans-serif;padding:16px}
 #pcg form{width:min(380px,100%);background:var(--sf,#fff);border:1px solid var(--ln,#d3e1e5);border-radius:8px;padding:28px}
 #pcg h1{font:600 24px/1.2 "Playfair Display",Georgia,serif;margin:0 0 4px}#pcg p{margin:0 0 16px;color:var(--mut,#52707b)}
@@ -153,45 +213,58 @@
 #pcg button{width:100%;padding:10px;border-radius:6px;border:1px solid var(--ac,#12475b);background:var(--ac,#12475b);color:var(--onac,#fff);font:500 14px Poppins,system-ui,sans-serif;cursor:pointer;margin-top:4px}
 #pcg button.s{background:transparent;color:var(--ac,#12475b)}#pcg .lk{background:none;border:0;color:var(--ac,#12475b);padding:6px 0;text-decoration:underline;width:auto}
 #pcg .er{color:var(--ko,#722f45);min-height:1.5em;margin:10px 0 0}#pcg .or{text-align:center;margin:12px 0;color:var(--na,#8aa3ab);font-size:12px}
-#pcout{position:fixed;left:12px;bottom:12px;z-index:2147483000;border:1px solid var(--ln,#d3e1e5);background:var(--sf,#fff);color:var(--mut,#52707b);border-radius:20px;padding:4px 12px;font:12px Poppins,system-ui,sans-serif;cursor:pointer;opacity:.85}
-#pcout:hover{opacity:1;color:var(--ko,#722f45)}`;
-  function box(html) {
-    let g = document.getElementById('pcg');
-    if (!g) { const s = document.createElement('style'); s.textContent = CSS; document.head.appendChild(s); g = document.createElement('div'); g.id = 'pcg'; document.body.appendChild(g); }
-    g.innerHTML = html; g.hidden = false; return g;
-  }
+#pcout{position:fixed;left:12px;bottom:12px;z-index:2147483000;display:flex;gap:4px}#pcout button{border:1px solid var(--ln,#d3e1e5);background:var(--sf,#fff);color:var(--mut,#52707b);border-radius:20px;padding:4px 12px;font:12px Poppins,system-ui,sans-serif;cursor:pointer;opacity:.85}
+#pcout button:hover{opacity:1;color:var(--ac,#12475b)}`;
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   function whenBody(f) { if (document.body) f(); else document.addEventListener('DOMContentLoaded', f); }
-  function gate(msg, signedIn) {
+  function box(html) {
+    let g = document.getElementById('pcg');
+    if (!g) { if (!document.getElementById('pcg-css')) { const s = document.createElement('style'); s.id = 'pcg-css'; s.textContent = CSS; document.head.appendChild(s); } g = document.createElement('div'); g.id = 'pcg'; document.body.appendChild(g); }
+    g.innerHTML = html; return g;
+  }
+  const ERR = { 'Invalid login credentials': 'E-mail ou mot de passe incorrect.', 'Email not confirmed': 'E-mail pas encore confirmé : utilisez le lien reçu.', 'Signups not allowed for this instance': "Ce compte n'existe pas : demandez à l'administrateur de vous créer un accès." };
+  const msg = e => ERR[e.message] || (/rate limit/i.test(e.message) ? 'Trop de tentatives : réessayez dans quelques minutes.' : 'Erreur : ' + e.message);
+  function gate(text, signedIn) {
     whenBody(() => {
       const g = box(`<form autocomplete="on"><h1>Planet’Claim</h1><p>Suivi des sinistres — accès réservé.</p>
-${signedIn ? '' : `<button type="button" id="pcg-go" class="s">Se connecter avec Google</button><div class="or">ou</div>
+${signedIn ? '<button type="button" id="pcg-x">Changer de compte</button>' : `<button type="button" id="pcg-go" class="s">Se connecter avec Google</button><div class="or">ou</div>
 <label>E-mail<input id="pcg-e" type="email" autocomplete="username" required></label>
 <label>Mot de passe<input id="pcg-p" type="password" autocomplete="current-password" required></label>
 <button type="submit">Se connecter</button><button type="button" class="lk" id="pcg-r">Mot de passe oublié ?</button>`}
-${signedIn ? '<button type="button" id="pcg-x">Changer de compte</button>' : ''}<p class="er" id="pcg-m">${msg ? esc(msg) : ''}</p></form>`);
+<p class="er" id="pcg-m">${text ? esc(text) : ''}</p></form>`);
       const m = t => (g.querySelector('#pcg-m').textContent = t);
-      const err = x => m(({ 'auth/invalid-credential': 'E-mail ou mot de passe incorrect.', 'auth/wrong-password': 'E-mail ou mot de passe incorrect.', 'auth/user-not-found': 'E-mail ou mot de passe incorrect.', 'auth/too-many-requests': 'Trop de tentatives : réessayez dans quelques minutes.', 'auth/popup-closed-by-user': 'Connexion annulée.' })[x.code] || 'Connexion impossible (' + (x.code || x.message) + ')');
-      g.querySelector('form').onsubmit = e => { e.preventDefault(); m(''); auth.signInWithEmailAndPassword(g.querySelector('#pcg-e').value.trim(), g.querySelector('#pcg-p').value).catch(err); };
-      const go = g.querySelector('#pcg-go'); if (go) go.onclick = () => auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(err);
-      const r = g.querySelector('#pcg-r'); if (r) r.onclick = () => { const e = g.querySelector('#pcg-e').value.trim(); if (!e) return m('Saisissez votre e-mail puis recliquez.'); auth.sendPasswordResetEmail(e).then(() => m('Si ce compte existe, un e-mail de réinitialisation vient d’être envoyé.')).catch(err); };
-      const x = g.querySelector('#pcg-x'); if (x) x.onclick = () => auth.signOut();
+      g.querySelector('form').onsubmit = async e => { e.preventDefault(); m(''); const { error } = await sb.auth.signInWithPassword({ email: g.querySelector('#pcg-e').value.trim(), password: g.querySelector('#pcg-p').value }); if (error) m(msg(error)); };
+      const go = g.querySelector('#pcg-go'); if (go) go.onclick = async () => { const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + location.pathname } }); if (error) m(msg(error)); };
+      const r = g.querySelector('#pcg-r'); if (r) r.onclick = async () => { const e = g.querySelector('#pcg-e').value.trim(); if (!e) return m('Saisissez votre e-mail puis recliquez.'); const { error } = await sb.auth.resetPasswordForEmail(e, { redirectTo: location.origin + location.pathname }); m(error ? msg(error) : 'Si ce compte existe, un e-mail vient d’être envoyé.'); };
+      const x = g.querySelector('#pcg-x'); if (x) x.onclick = () => sb.auth.signOut();
     });
   }
-  function gateVerify(u) {
+  function gatePassword(user, done, cancellable) {
     whenBody(() => {
-      const g = box(`<form><h1>Vérifiez votre e-mail</h1><p>Un lien de confirmation doit être validé pour ${esc(u.email)} avant le premier accès.</p>
-<button type="button" id="pcg-s">Envoyer le lien</button><button type="button" class="s" id="pcg-ok">J’ai cliqué sur le lien</button><button type="button" class="lk" id="pcg-x">Changer de compte</button><p class="er" id="pcg-m"></p></form>`);
+      const g = box(`<form><h1>${cancellable ? 'Changer mon mot de passe' : 'Choisissez votre mot de passe'}</h1><p>${esc(user.email)}</p>
+<label>Nouveau mot de passe (10 caractères minimum)<input id="pcg-n" type="password" autocomplete="new-password" minlength="10" required></label>
+<label>Confirmation<input id="pcg-c" type="password" autocomplete="new-password" minlength="10" required></label>
+<button type="submit">Enregistrer</button>${cancellable ? '<button type="button" class="lk" id="pcg-k">Annuler</button>' : ''}<p class="er" id="pcg-m"></p></form>`);
       const m = t => (g.querySelector('#pcg-m').textContent = t);
-      g.querySelector('#pcg-s').onclick = () => u.sendEmailVerification().then(() => m('Lien envoyé : consultez votre boîte mail.')).catch(x => m(x.code === 'auth/too-many-requests' ? 'Lien déjà envoyé, patientez.' : x.message));
-      g.querySelector('#pcg-ok').onclick = async () => { await u.reload(); await u.getIdToken(true); if (auth.currentUser.emailVerified) location.reload(); else m('Pas encore vérifié.'); };
-      g.querySelector('#pcg-x').onclick = () => auth.signOut();
+      g.querySelector('form').onsubmit = async e => {
+        e.preventDefault(); const a = g.querySelector('#pcg-n').value;
+        if (a !== g.querySelector('#pcg-c').value) return m('Les deux saisies sont différentes.');
+        const { error } = await sb.auth.updateUser({ password: a }); if (error) return m(msg(error));
+        g.remove(); done();
+      };
+      const k = g.querySelector('#pcg-k'); if (k) k.onclick = () => g.remove();
     });
   }
   function ungate() {
     whenBody(() => {
       const g = document.getElementById('pcg'); if (g) g.remove();
-      if (!document.getElementById('pcout')) { const b = document.createElement('button'); b.id = 'pcout'; b.type = 'button'; b.textContent = 'Déconnexion'; b.title = SESSION.email; b.onclick = () => auth.signOut(); document.body.appendChild(b); }
+      if (document.getElementById('pcout')) return;
+      const d = document.createElement('div'); d.id = 'pcout';
+      d.innerHTML = '<button type="button" id="pco-pw">Mot de passe</button><button type="button" id="pco-x">Déconnexion</button>';
+      d.title = SESSION.email; document.body.appendChild(d);
+      d.querySelector('#pco-pw').onclick = () => gatePassword({ email: SESSION.email }, () => alert('Mot de passe modifié.'), true);
+      d.querySelector('#pco-x').onclick = () => sb.auth.signOut();
+      if (!document.getElementById('pcg-css')) { const s = document.createElement('style'); s.id = 'pcg-css'; s.textContent = CSS; document.head.appendChild(s); }
     });
   }
   // Masque l'application tant que la session n'est pas prête.
